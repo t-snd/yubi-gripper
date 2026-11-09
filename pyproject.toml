@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yubi-gripper"
+version = "0.1.0"
+description = "Replay YUBI gripper encoder angles (mcap / LeRobot) on a Dynamixel XM460-W350-R"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy",
+  "pyyaml",
+  "dynamixel-sdk",
+  "mcap",
+  "mcap-ros2-support",
+  "pyarrow",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+dev = ["pytest"]
+
+[project.scripts]
+yubi-gripper = "yubi_gripper.cli:main"
+
+[tool.setuptools]
+packages = ["yubi_gripper"]

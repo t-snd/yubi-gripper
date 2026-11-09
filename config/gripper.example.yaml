@@ -1,0 +1,25 @@
+# Copy to config/gripper.yaml and edit (or pass with --config).
+# CLI options override these values.
+
+dynamixel:
+  port: /dev/ttyUSB0          # U2D2 etc.
+  baudrate: 57600             # factory default of XM460-W350-R
+  id: 1                       # factory default ID
+  # 3: position (0..4095, one turn)
+  # 4: extended position (multi-turn)
+  # 5: current-based position (recommended for a gripper: limits squeeze force)
+  operating_mode: 5
+  goal_current: 300           # [x 2.69 mA] used in mode 5 (clamped to Current Limit)
+  approach_profile_velocity: 30   # [x 0.229 rpm] slow move to the first sample
+  replay_profile_velocity: 0      # 0 = no profile limit (follow commands as fast as possible)
+  profile_acceleration: 0
+
+mapping:
+  # YUBI encoder_node: 0 rad = fully closed, ~0.94 rad = fully open (URDF limit).
+  # Check your own data with `yubi-gripper info <data>` and adjust if needed.
+  encoder_closed_rad: 0.0
+  encoder_open_rad: 0.94
+  # Motor positions of the robot-side gripper. Measure with `yubi-gripper calibrate`.
+  motor_closed_tick: 2048
+  motor_open_tick: 3072
+  clip: true
